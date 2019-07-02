@@ -15,7 +15,20 @@ import 'package:flutter/material.dart'
         StatefulWidget,
         Text,
         Widget;
-import 'package:flutter/widgets.dart';
+
+import 'package:flutter/widgets.dart'
+    show
+        BuildContext,
+        Center,
+        EdgeInsets,
+        GestureDetector,
+        Icon,
+        ListView,
+        Navigator,
+        State,
+        StatefulWidget,
+        Text,
+        Widget;
 
 import 'package:flutter_canvas/image_picker.dart' show pickImageFromCamera;
 import 'package:flutter_canvas/new_painter_controller.dart' show newController;
