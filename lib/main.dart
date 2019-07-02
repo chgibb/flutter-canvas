@@ -17,13 +17,12 @@ import 'package:flutter/material.dart'
         Widget,
         runApp;
 
-import 'package:image_picker/image_picker.dart' show ImagePicker, ImageSource;
+import 'package:flutter_canvas/image_picker.dart' show pickImageFromCamera;
 
 void main() {
   runApp(MaterialApp(
     home: MyHomePage(),
   ));
-  ;
 }
 
 class MyHomePage extends StatefulWidget {
@@ -35,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   File _image;
 
   Future getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    File image = await pickImageFromCamera();
 
     setState(() {
       _image = image;
