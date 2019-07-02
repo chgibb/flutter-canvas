@@ -30,7 +30,7 @@ import 'package:flutter/widgets.dart'
         Text,
         Widget;
 
-import 'package:flutter_canvas/image_picker.dart' show pickImageFromCamera;
+import 'package:flutter_canvas/pick_image_from_camera.dart' show pickImageFromCamera;
 import 'package:flutter_canvas/new_painter_controller.dart' show newController;
 import 'package:flutter_canvas/painter_home.dart';
 import 'package:painter2/painter2.dart' show PainterController;
