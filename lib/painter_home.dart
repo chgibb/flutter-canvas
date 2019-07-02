@@ -28,8 +28,6 @@ class _AnnotateImageState extends State<AnnotateImage> {
     _finished = false;
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     List<Widget> actions;
