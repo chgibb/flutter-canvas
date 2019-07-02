@@ -9,6 +9,7 @@ import 'package:flutter/material.dart'
         FloatingActionButton,
         Icon,
         Icons,
+        MaterialPageRoute,
         Scaffold,
         State,
         StatefulWidget,
@@ -17,8 +18,9 @@ import 'package:flutter/material.dart'
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_canvas/image_picker.dart' show pickImageFromCamera;
-import 'package:flutter_canvas/new_painter_controller.dart';
-import 'package:painter2/painter2.dart';
+import 'package:flutter_canvas/new_painter_controller.dart' show newController;
+import 'package:flutter_canvas/painter_home.dart';
+import 'package:painter2/painter2.dart' show PainterController;
 
 class ImagePickerHomePage extends StatefulWidget {
   @override
@@ -45,13 +47,20 @@ class _ImagePickerHomePageState extends State<ImagePickerHomePage> {
         padding: const EdgeInsets.all(8.0),
         itemCount: _images != null ? _images.length : 0,
         itemBuilder: (BuildContext context, int index) {
-          return Center(
-            child: _images[index].backgroundImage,
+          return GestureDetector(
+            child: Center(
+              child: _images[index].backgroundImage,
+            ),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AnnotateImage(_images[index])));
+            },
           );
         },
         separatorBuilder: (BuildContext context, int index) => const Divider(),
       ),
-      // child: _image == null ? Text('No image selected.') : Image.file(_image),
       floatingActionButton: FloatingActionButton(
         onPressed: getImage,
         tooltip: 'Pick Image',
