@@ -1,14 +1,30 @@
-import 'dart:io';
+import 'dart:io' show File;
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        AppBar,
+        BuildContext,
+        Center,
+        FloatingActionButton,
+        Icon,
+        Icons,
+        Image,
+        MaterialApp,
+        Scaffold,
+        State,
+        StatefulWidget,
+        Text,
+        Widget,
+        runApp;
 
-import 'package:image_picker/image_picker.dart';
+import 'package:image_picker/image_picker.dart' show ImagePicker, ImageSource;
 
-void main(){
-  runApp(MaterialApp(home: MyHomePage(),));
+void main() {
+  runApp(MaterialApp(
+    home: MyHomePage(),
+  ));
   ;
 }
-
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -33,9 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('Image Picker Example'),
       ),
       body: Center(
-        child: _image == null
-            ? Text('No image selected.')
-            : Image.file(_image),
+        child: _image == null ? Text('No image selected.') : Image.file(_image),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: getImage,
