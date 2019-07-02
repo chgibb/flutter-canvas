@@ -21,16 +21,16 @@ import 'package:flutter_canvas/image_picker.dart' show pickImageFromCamera;
 
 void main() {
   runApp(MaterialApp(
-    home: MyHomePage(),
+    home: ImagePickerHomePage(),
   ));
 }
 
-class MyHomePage extends StatefulWidget {
+class ImagePickerHomePage extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _ImagePickerHomePageState createState() => _ImagePickerHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _ImagePickerHomePageState extends State<ImagePickerHomePage> {
   File _image;
 
   Future getImage() async {
