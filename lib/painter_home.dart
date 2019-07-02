@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:painter2/painter2.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
+import 'new_painter_controller.dart';
+
 class ExamplePage extends StatefulWidget {
   @override
   _ExamplePageState createState() => new _ExamplePageState();
@@ -21,14 +23,7 @@ class _ExamplePageState extends State<ExamplePage> {
     _controller = newController();
   }
 
-  PainterController newController() {
-    PainterController controller = PainterController();
-    controller.thickness = 5.0;
-    controller.backgroundColor = Colors.green;
-    controller.backgroundImage = Image.network(
-        'https://cdn-images-1.medium.com/max/1200/1*5-aoK8IBmXve5whBQM90GA.png');
-    return controller;
-  }
+  
 
   @override
   Widget build(BuildContext context) {
