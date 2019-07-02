@@ -7,20 +7,25 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 import 'new_painter_controller.dart';
 
-class ExamplePage extends StatefulWidget {
+class AnnotateImage extends StatefulWidget {
+  PainterController controller;
+
+  AnnotateImage(this.controller);
+
   @override
-  _ExamplePageState createState() => new _ExamplePageState();
+  _AnnotateImageState createState() => new _AnnotateImageState(controller);
 }
 
-class _ExamplePageState extends State<ExamplePage> {
+class _AnnotateImageState extends State<AnnotateImage> {
   bool _finished;
   PainterController _controller;
+
+  _AnnotateImageState(this._controller);
 
   @override
   void initState() {
     super.initState();
     _finished = false;
-    _controller = newController();
   }
 
   
@@ -67,17 +72,8 @@ class _ExamplePageState extends State<ExamplePage> {
                 _finished = true;
               });
               Uint8List bytes = await _controller.exportAsPNGBytes();
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (BuildContext context) {
-                return Scaffold(
-                  appBar: AppBar(
-                    title: Text('View your image'),
-                  ),
-                  body: Container(
-                    child: Image.memory(bytes),
-                  ),
-                );
-              }));
+              _controller.backgroundImage = Image.memory(bytes);
+              Navigator.pop(context);
             }),
       ];
     }
