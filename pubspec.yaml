@@ -18,6 +18,8 @@ environment:
 
 dependencies:
   image_picker:
+  painter2:
+  flutter_colorpicker:
   flutter:
     sdk: flutter
 
