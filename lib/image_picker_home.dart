@@ -32,7 +32,7 @@ import 'package:flutter/widgets.dart'
 import 'package:flutter_canvas/image_controller.dart';
 
 import 'package:flutter_canvas/pick_image_from_camera.dart' show pickImageFromCamera;
-import 'package:flutter_canvas/new_painter_controller.dart' show newController;
+import 'package:flutter_canvas/new_painter_controller.dart' show newPainterController;
 import 'package:flutter_canvas/annotate_image.dart';
 
 class ImagePickerHomePage extends StatefulWidget {
@@ -46,7 +46,7 @@ class _ImagePickerHomePageState extends State<ImagePickerHomePage> {
     File image = await pickImageFromCamera();
 
     setState(() {
-      _images.add(ImageController(newController(image)));
+      _images.add(ImageController(newPainterController(image)));
     });
   }
 

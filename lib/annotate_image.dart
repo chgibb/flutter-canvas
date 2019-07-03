@@ -39,7 +39,7 @@ class _AnnotateImageState extends State<AnnotateImage> {
           tooltip: 'New Painting',
           onPressed: () => setState(() {
                 _finished = false;
-                _controller.paintController = newController();
+                _controller.paintController = newPainterController();
               }),
         ),
       ];
