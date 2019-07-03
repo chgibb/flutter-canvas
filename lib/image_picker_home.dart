@@ -29,11 +29,11 @@ import 'package:flutter/widgets.dart'
         StatefulWidget,
         Text,
         Widget;
+import 'package:flutter_canvas/image_controller.dart';
 
 import 'package:flutter_canvas/pick_image_from_camera.dart' show pickImageFromCamera;
 import 'package:flutter_canvas/new_painter_controller.dart' show newController;
-import 'package:flutter_canvas/painter_home.dart';
-import 'package:painter2/painter2.dart' show PainterController;
+import 'package:flutter_canvas/annotate_image.dart';
 
 class ImagePickerHomePage extends StatefulWidget {
   @override
@@ -41,12 +41,12 @@ class ImagePickerHomePage extends StatefulWidget {
 }
 
 class _ImagePickerHomePageState extends State<ImagePickerHomePage> {
-  List<PainterController> _images = new List();
+  List<ImageController> _images = new List();
   Future getImage() async {
     File image = await pickImageFromCamera();
 
     setState(() {
-      _images.add(newController(image));
+      _images.add(ImageController(newController(image)));
     });
   }
 
@@ -62,7 +62,7 @@ class _ImagePickerHomePageState extends State<ImagePickerHomePage> {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             child: Center(
-              child: _images[index].backgroundImage,
+              child: _images[index].annotatedImage,
             ),
             onTap: () {
               Navigator.push(
