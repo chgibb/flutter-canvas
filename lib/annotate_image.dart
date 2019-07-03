@@ -9,7 +9,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'new_painter_controller.dart';
 
 class AnnotateImage extends StatefulWidget {
-  ImageController controller;
+  final ImageController controller;
 
   AnnotateImage(this.controller);
 
@@ -71,7 +71,7 @@ class _AnnotateImageState extends State<AnnotateImage> {
                 _finished = true;
               });
               Uint8List bytes = await _controller.paintController.exportAsPNGBytes();
-              _controller.annotatedImage = Image.memory(bytes);
+              _controller.updateAnnotation(bytes);
               Navigator.pop(context);
             }),
       ];
