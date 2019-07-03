@@ -8,7 +8,7 @@ import 'package:image/image.dart' as Img;
 
 class ImageController {
   PainterController paintController;
-  Img.Image _thumb;
+  Material.Image thumb;
   Material.Image _origImage;
   Material.Image annotatedImage;
   Uint8List annotatedBytes;
@@ -19,14 +19,10 @@ class ImageController {
   }
 
   void updateAnnotation(Uint8List bytes) {
-    annotatedImage = Material.Image.memory(bytes);
     annotatedBytes = bytes;
-    generateThumbnail();
+    annotatedImage = Material.Image.memory(bytes);
+    thumb = Material.Image.memory(bytes,height:100,width:100);
   }
 
-  void generateThumbnail() {
-    _thumb = copyResize(Img.Image.fromBytes(100,100, annotatedBytes),width: 10,height: 10);
-  }
 
-  Img.Image get thumb => _thumb;
 }
