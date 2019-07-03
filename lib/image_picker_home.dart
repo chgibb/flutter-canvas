@@ -69,7 +69,7 @@ class _ImagePickerHomePageState extends State<ImagePickerHomePage> {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             child: Center(
-              child: _images[index].annotatedImage,
+              child: _images[index].thumb != null ? _images[index].thumb : _images[index].annotatedImage,
             ),
             onTap: () {
               Navigator.push(
