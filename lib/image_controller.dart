@@ -7,15 +7,15 @@ import 'package:painter2/painter2.dart';
 import 'package:image/image.dart' as Img;
 
 class ImageController {
-  PainterController _painterController;
+  PainterController paintController;
   Img.Image _thumb;
   Material.Image _origImage;
   Material.Image annotatedImage;
   Uint8List annotatedBytes;
 
-  ImageController(this._painterController) {
-    _origImage = _painterController.backgroundImage;
-    annotatedImage = _painterController.backgroundImage;
+  ImageController(this.paintController) {
+    _origImage = paintController.backgroundImage;
+    annotatedImage = paintController.backgroundImage;
   }
 
   void updateAnnotation(Uint8List bytes) {
@@ -26,11 +26,6 @@ class ImageController {
 
   void generateThumbnail() {
     _thumb = copyResize(Img.Image.fromBytes(100,100, annotatedBytes),width: 10,height: 10);
-  }
-
-  PainterController get paintController => _painterController;
-  set paintController(PainterController controller){
-    _painterController = controller;
   }
 
   Img.Image get thumb => _thumb;
