@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_canvas/image_controller.dart';
 
 import 'package:painter2/painter2.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -8,7 +9,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'new_painter_controller.dart';
 
 class AnnotateImage extends StatefulWidget {
-  PainterController controller;
+  ImageController controller;
 
   AnnotateImage(this.controller);
 
@@ -18,7 +19,7 @@ class AnnotateImage extends StatefulWidget {
 
 class _AnnotateImageState extends State<AnnotateImage> {
   bool _finished;
-  PainterController _controller;
+  ImageController _controller;
 
   _AnnotateImageState(this._controller);
 
@@ -38,7 +39,7 @@ class _AnnotateImageState extends State<AnnotateImage> {
           tooltip: 'New Painting',
           onPressed: () => setState(() {
                 _finished = false;
-                _controller = newController();
+                _controller.paintController = newController();
               }),
         ),
       ];
@@ -48,20 +49,20 @@ class _AnnotateImageState extends State<AnnotateImage> {
           icon: Icon(Icons.undo),
           tooltip: 'Undo',
           onPressed: () {
-            if (_controller.canUndo) _controller.undo();
+            if (_controller.paintController.canUndo) _controller.paintController.undo();
           },
         ),
         IconButton(
           icon: Icon(Icons.redo),
           tooltip: 'Redo',
           onPressed: () {
-            if (_controller.canRedo) _controller.redo();
+            if (_controller.paintController.canRedo) _controller.paintController.redo();
           },
         ),
         IconButton(
           icon: Icon(Icons.delete),
           tooltip: 'Clear',
-          onPressed: () => _controller.clear(),
+          onPressed: () => _controller.paintController.clear(),
         ),
         IconButton(
             icon: Icon(Icons.check),
@@ -69,8 +70,8 @@ class _AnnotateImageState extends State<AnnotateImage> {
               setState(() {
                 _finished = true;
               });
-              Uint8List bytes = await _controller.exportAsPNGBytes();
-              _controller.backgroundImage = Image.memory(bytes);
+              Uint8List bytes = await _controller.paintController.exportAsPNGBytes();
+              _controller.annotatedImage = Image.memory(bytes);
               Navigator.pop(context);
             }),
       ];
@@ -80,11 +81,11 @@ class _AnnotateImageState extends State<AnnotateImage> {
           title: Text('Painter2 Example'),
           actions: actions,
           bottom: PreferredSize(
-            child: DrawBar(_controller),
+            child: DrawBar(_controller.paintController),
             preferredSize: Size(MediaQuery.of(context).size.width, 30.0),
           )),
       body: Center(
-          child: AspectRatio(aspectRatio: 1.0, child: Painter(_controller))),
+          child: AspectRatio(aspectRatio: 1.0, child: Painter(_controller.paintController))),
     );
   }
 }
