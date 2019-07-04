@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'dart:ui';
 
 import 'package:flutter/material.dart' as Material;
 
@@ -14,6 +15,7 @@ class ImageController {
   ImageController(this.paintController) {
     _origImage = paintController.backgroundImage;
     annotatedImage = paintController.backgroundImage;
+    paintController.drawColor = Color.fromARGB(255, 255, 0, 0);
   }
 
   void updateAnnotation(Uint8List bytes) {
