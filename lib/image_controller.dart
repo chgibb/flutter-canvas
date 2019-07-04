@@ -1,10 +1,8 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart' as Material;
-import 'package:image/image.dart';
 
 import 'package:painter2/painter2.dart';
-import 'package:image/image.dart' as Img;
 
 class ImageController {
   PainterController paintController;
