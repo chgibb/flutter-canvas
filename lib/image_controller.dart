@@ -21,8 +21,6 @@ class ImageController {
   void updateAnnotation(Uint8List bytes) {
     annotatedBytes = bytes;
     annotatedImage = Material.Image.memory(bytes);
-    thumb = Material.Image.memory(bytes,height:100,width:100);
+    thumb = Material.Image.memory(bytes, height: 100, width: 100);
   }
-
-
 }
