@@ -23,7 +23,6 @@ class _AnnotateImageState extends State<AnnotateImage> {
 
   _AnnotateImageState(this._controller) {
     _annotating = false;
-
   }
 
   @override
@@ -97,7 +96,7 @@ class _AnnotateImageState extends State<AnnotateImage> {
             backgroundColor: Colors.white,
             heroTag: "middle",
             child: Icon(Icons.edit),
-            onPressed: (){
+            onPressed: () {
               setState(() {
                 _annotating = true;
                 _controller.paintController.canPaint = true;
@@ -112,7 +111,7 @@ class _AnnotateImageState extends State<AnnotateImage> {
             backgroundColor: Colors.blue,
             heroTag: "middle",
             child: Icon(Icons.edit),
-            onPressed: (){
+            onPressed: () {
               setState(() {
                 _annotating = false;
                 _controller.paintController.canPaint = false;
