@@ -18,17 +18,12 @@ class AnnotateImage extends StatefulWidget {
 
 class _AnnotateImageState extends State<AnnotateImage> {
   bool _finished;
+  bool _annotating;
   ImageController _controller;
 
   _AnnotateImageState(this._controller) {
-    //Rebuild when the user annotates
-    _controller.paintController.addListener(() {
-      setState(() {
-        if(_controller.paintController.canUndo{
-          _controller.paintController.undo();
-        }
-      });
-    });
+    _annotating = false;
+
   }
 
   @override
@@ -53,25 +48,6 @@ class _AnnotateImageState extends State<AnnotateImage> {
       ];
     } else {
       actions = <Widget>[
-        /*IconButton(
-          icon: Icon(Icons.undo),
-          tooltip: 'Undo',
-          onPressed: () {
-            if (_controller.paintController.canUndo) _controller.paintController.undo();
-          },
-        ),
-        IconButton(
-          icon: Icon(Icons.redo),
-          tooltip: 'Redo',
-          onPressed: () {
-            if (_controller.paintController.canRedo) _controller.paintController.redo();
-          },
-        ),
-        IconButton(
-          icon: Icon(Icons.delete),
-          tooltip: 'Clear',
-          onPressed: () => _controller.paintController.clear(),
-        ),*/
         IconButton(
             icon: Icon(Icons.check),
             onPressed: () async {
@@ -88,7 +64,7 @@ class _AnnotateImageState extends State<AnnotateImage> {
 
     Widget leftButton;
 
-    if (_controller.paintController.canUndo) {
+    if (_annotating) {
       leftButton = Opacity(
         opacity: 0.6,
         child: FloatingActionButton.extended(
@@ -111,6 +87,40 @@ class _AnnotateImageState extends State<AnnotateImage> {
       );
     }
 
+    Widget middleButton;
+
+    if (!_annotating) {
+      middleButton = Opacity(
+          opacity: 0.6,
+          child: FloatingActionButton(
+            foregroundColor: Colors.blue,
+            backgroundColor: Colors.white,
+            heroTag: "middle",
+            child: Icon(Icons.edit),
+            onPressed: (){
+              setState(() {
+                _annotating = true;
+                _controller.paintController.canPaint = true;
+              });
+            },
+          ));
+    } else {
+      middleButton = Opacity(
+          opacity: 0.6,
+          child: FloatingActionButton(
+            foregroundColor: Colors.white,
+            backgroundColor: Colors.blue,
+            heroTag: "middle",
+            child: Icon(Icons.edit),
+            onPressed: (){
+              setState(() {
+                _annotating = false;
+                _controller.paintController.canPaint = false;
+              });
+            },
+          ));
+    }
+
     return Scaffold(
         extendBody: true,
         backgroundColor: Colors.black,
@@ -126,14 +136,7 @@ class _AnnotateImageState extends State<AnnotateImage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             leftButton,
-            Opacity(
-                opacity: 0.6,
-                child: FloatingActionButton(
-                  foregroundColor: Colors.blue,
-                  backgroundColor: Colors.white,
-                  heroTag: "middle",
-                  child: Icon(Icons.edit),
-                )),
+            middleButton,
             Opacity(
               opacity: 0.6,
               child: FloatingActionButton.extended(
